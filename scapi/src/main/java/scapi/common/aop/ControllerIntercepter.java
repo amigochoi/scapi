@@ -30,7 +30,7 @@ public class ControllerIntercepter {
 		perfStopWatch = new Log4JStopWatch(org.apache.log4j.Logger.getLogger(Log4JStopWatch.class));
 		StopWatch stopWatch = new StopWatch();
 		stopWatch.start();
-		/*
+		/* 
 		 * String args = ""; Object[] signatureArgs = pjp.getArgs(); for (Object
 		 * signatureArg : signatureArgs) { args += signatureArg + ","; }
 		 * 

@@ -21,9 +21,9 @@ public class UserServiceImpl implements UserService {
 //  keyGenerator = @KeyGenerator(name = "StringCacheKeyGenerator"),,decoratedCacheType=DecoratedCacheType.REFRESHING_SELF_POPULATING_CACHE,refreshInterval=1000*60
 	@Cacheable(cacheName = "userCache", cacheNull = false)
 	@Override
-	public User getUser() {
+	public User getUser(User user) {
 		// TODO Auto-generated method stub
-		return userDAO.getUser();
+		return userDAO.getUser(user);
 	}
 
 }

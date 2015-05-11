@@ -12,9 +12,9 @@ import scapi.model.User;
 public class UserDAOImpl implements UserDAO{
 	
 	@Override
-	public User getUser() {
+	public User getUser(User user) {
 		// TODO Auto-generated method stub
-		return new User();
+		return user;
 	}
 
 

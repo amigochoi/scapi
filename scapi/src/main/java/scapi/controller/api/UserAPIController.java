@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import scapi.model.User;
 import scapi.model.display.ResultJson;
 import scapi.service.UserService;
 
@@ -21,7 +22,7 @@ public class UserAPIController {
 	UserService userService;
 	// consumes = MediaType.APPLICATION_JSON_VALUE,
 	@RequestMapping(value = "/getUser", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResultJson getUser() {
-		return new ResultJson(userService.getUser());
+	public @ResponseBody ResultJson getUser(User user) {
+		return new ResultJson(userService.getUser(user));
 	}
 }

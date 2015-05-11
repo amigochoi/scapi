@@ -30,9 +30,9 @@
     <context:property-placeholder properties-ref="propertyConfigurer" />
 	
 	<!-- ehcache -->
-    <ehcache:annotation-driven cache-manager="ehCacheManager" />
+    <ehcache:annotation-driven cache-manager="cacheManager" />
     
-    <bean id="ehCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"/>
+    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"/>
 
 	<import resource="aop-other.xml" />
 <!-- 	<import resource="applicationContext-shiro.xml" /> -->

@@ -4,6 +4,6 @@ import scapi.model.User;
 
 public interface UserService {
 	
-	public User getUser();
+	public User getUser(User user);
 	
 }

@@ -5,23 +5,16 @@ myApp
 				'ApiListCtrl',
 				function($scope) {
 					$scope.param = {
-						member_type : "tvbcom",
-						extid : "1234",
-						request_party : "mytv",
-						request_party_user : "mytvapi",
-						tran_amount : "1",
-						action : "add",
-						action_info : "",
-						remark : "",
-						hashcode : "zxcvASDF",
-						page : "1",
-						hits : "50"
+						userId : "123",
+						userName : "name",
+						userEmail : "em@il.com",
+						userPhone : "1234567"
 					};
 
 					$scope.apiList = [
 							{
-								'name' : 'add coin',
-								'url' : '../api/addCoin?member_type={member_type}&extid={extid}&request_party={request_party}&request_party_user={request_party_user}&tran_amount={tran_amount}&action={action}&action_info={action_info}&remark={remark}&hashCode={hashcode}'
+								'name' : 'get User',
+								'url' : '../api/user/getUser?userId={userId}&userName={userName}&userEmail={userEmail}&userPhone={userPhone}'
 							},
 						];
 
