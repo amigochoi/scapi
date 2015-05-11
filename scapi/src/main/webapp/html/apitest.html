@@ -1,0 +1,34 @@
+<html ng-app="ApiListAPP">
+<head>
+<title>goCoin API List</title>
+<script src="../js/angular.min.js"></script>
+<script src="../js/apiListApp.js"></script>
+<link rel="stylesheet" href="../css/bootstrap.css">
+</head>
+<body ng-controller="ApiListCtrl" data-ng-init="updateAPI()">
+	<div class="col-md-12">
+		<div class="btn-groups-toolbar">
+			<h3>API List</h3>
+		</div>
+	</div>
+
+	<div class="col-md-6">
+		<form class="form-horizontal">
+			<div class="form-group form-group-sm"
+				ng-repeat="(key, value) in param">
+				<label for="{{key}}" class="col-sm-6 control-label">{{key}}</label>
+				<div class="col-sm-6">
+					<input type="text" class="input-sm form-control"
+						ng-model="param[key]" ng-change="updateAPI();"/>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="col-md-6">
+		<ul>
+			<li ng-repeat="api in showApiList"><a href="{{api.url}}"
+				target="_blank">{{api.name}}</a><br /> <small>{{api.url}}</small></li>
+		</ul>
+	</div>
+</body>
+</html>
