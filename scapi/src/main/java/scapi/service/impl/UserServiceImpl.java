@@ -10,6 +10,7 @@ import scapi.model.User;
 import scapi.service.UserService;
 
 import com.googlecode.ehcache.annotations.Cacheable;
+import com.googlecode.ehcache.annotations.KeyGenerator;
 
 @Service("userService")
 @Slf4j
@@ -19,7 +20,7 @@ public class UserServiceImpl implements UserService {
 	UserDAO userDAO;
 	
 //  keyGenerator = @KeyGenerator(name = "StringCacheKeyGenerator"),,decoratedCacheType=DecoratedCacheType.REFRESHING_SELF_POPULATING_CACHE,refreshInterval=1000*60
-	@Cacheable(cacheName = "userCache", cacheNull = false)
+	@Cacheable(cacheName = "userCache", keyGenerator = @KeyGenerator(name = "StringCacheKeyGenerator"), cacheNull = false)
 	@Override
 	public User getUser(User user) {
 		// TODO Auto-generated method stub

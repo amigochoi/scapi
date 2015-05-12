@@ -104,20 +104,20 @@ public class CacheMonitoringService {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<CacheElementDisplay> getAllElements(String cacheName) {
-		List<String> cacheKeys = new ArrayList<String>();
+		List<Object> cacheKeys = new ArrayList<Object>();
 		Cache cache = getCache(cacheName);
 		if (cache != null) {
 			cacheKeys = cache.getKeys();
 		}
 
 		List<CacheElementDisplay> elementList = new ArrayList<CacheElementDisplay>();
-		for (String cacheKey : cacheKeys) {
+		for (Object cacheKey : cacheKeys) {
 		
 			Element element = cache.getQuiet(cacheKey);
 			CacheElementDisplay ceDisplay = new CacheElementDisplay();
 
 			if (element != null) {
-				ceDisplay.setCacheKey(cacheKey);
+				ceDisplay.setCacheKey(String.valueOf(cacheKey));
 				ceDisplay.setHitCount(element.getHitCount());
 				ceDisplay.setTimeToLive(element.getTimeToLive());
 				ceDisplay.setSizeOfMomery(element.getSerializedSize()/1024);
