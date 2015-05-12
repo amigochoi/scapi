@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Admin menu</title>
 <script src="${ctx}/js/angular.min.js"></script>
-<script src="${ctx}/js/cacheListApp.js"></script>
+<script src="${ctx}/js/admin/cacheListApp.js"></script>
 <link rel="stylesheet" href="${ctx}/css/bootstrap.css"/>
 <link rel="stylesheet" href="${ctx}/css/font-awesome-4.3.0 2/css/font-awesome.min.css"/>
 </head>

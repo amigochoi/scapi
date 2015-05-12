@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Admin menu</title>
 <script src="${ctx}/js/angular.min.js"></script>
-<script src="${ctx}/js/adminApp.js"></script>
+<script src="${ctx}/js/admin/adminApp.js"></script>
 <link rel="stylesheet" href="${ctx}/css/bootstrap.css">
 </head>
 <body ng-controller="AdminCtrl">
