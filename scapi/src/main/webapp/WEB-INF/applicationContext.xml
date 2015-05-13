@@ -30,11 +30,16 @@
     <context:property-placeholder properties-ref="propertyConfigurer" />
 	
 	<!-- ehcache -->
-    <ehcache:annotation-driven cache-manager="cacheManager" />
-    
-    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"/>
+    <ehcache:annotation-driven cache-manager="ehCacheManager" />
+    <bean id="ehCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"/>
+
+	<!-- redis cache -->
+	<import resource="applicationContext-redis-cache.xml" />
+	<import resource="classpath:redis-cache.xml" />
+
 
 	<import resource="aop-other.xml" />
+	
 <!-- 	<import resource="applicationContext-shiro.xml" /> -->
 
 </beans>

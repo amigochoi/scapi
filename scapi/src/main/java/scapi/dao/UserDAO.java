@@ -6,5 +6,5 @@ import scapi.model.User;
 public interface UserDAO {
 	public User getUser(User user);
 	
-//	public User getUserDetail(User user);
+	public User getUserById(Integer id);
 }

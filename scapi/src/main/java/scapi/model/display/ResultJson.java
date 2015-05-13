@@ -30,7 +30,7 @@ public class ResultJson implements Serializable {
 	private Object dataObject;
 	private String message = "";
 	private String exceptionMsg = "";
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss",timezone="Hongkong")
 	private Date responseDateTime;
 	private String responseServer;
 	

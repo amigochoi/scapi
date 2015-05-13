@@ -17,5 +17,13 @@ public class UserDAOImpl implements UserDAO{
 		return user;
 	}
 
+	@Override
+	public User getUserById(Integer id) {
+		// TODO Auto-generated method stub
+		User user = new User();
+		user.setUserId(id);
+		return user;
+	}
+
 
 }

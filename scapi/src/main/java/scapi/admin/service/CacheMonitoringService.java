@@ -26,7 +26,7 @@ import scapi.admin.model.CacheElementDisplay;
 public class CacheMonitoringService {
 	
 	@Autowired
-	private CacheManager cacheManager;
+	private CacheManager ehCacheManager;
 
 
 	/*
@@ -36,7 +36,7 @@ public class CacheMonitoringService {
 		Cache cache = null;
 		if (StringUtils.isNotBlank(cacheName)) {
 
-			cache = cacheManager.getCache(cacheName);
+			cache = ehCacheManager.getCache(cacheName);
 		}
 		return cache;
 	}
@@ -46,7 +46,7 @@ public class CacheMonitoringService {
 	 */
 	public List<CacheDisplay> getAllCache() throws IllegalStateException, CacheException {
 
-		String[] cacheNameArr = cacheManager.getCacheNames();
+		String[] cacheNameArr = ehCacheManager.getCacheNames();
 		List<String> cacheNameList = new ArrayList<String>();
 
 		if (ArrayUtils.isNotEmpty(cacheNameArr)) {
@@ -55,7 +55,7 @@ public class CacheMonitoringService {
 
 		List<CacheDisplay> cacheDisplayList = new ArrayList<CacheDisplay>();
 		for (String cacheName : cacheNameList) {
-			Cache cache = (Cache) cacheManager.getCache(cacheName);
+			Cache cache = (Cache) ehCacheManager.getCache(cacheName);
 
 			CacheDisplay cacheDisplay = new CacheDisplay();
 			if (cache != null) {
@@ -94,8 +94,8 @@ public class CacheMonitoringService {
 	 */
 	public void clearAllCache() {
 
-		if (cacheManager != null) {
-			cacheManager.clearAll();
+		if (ehCacheManager != null) {
+			ehCacheManager.clearAll();
 		}
 	}
 
@@ -161,6 +161,6 @@ public class CacheMonitoringService {
 	 * Check Cache Name is exists
 	 */
 	public boolean cacheExists(String cacheName){
-		return cacheManager.cacheExists(cacheName);
+		return ehCacheManager.cacheExists(cacheName);
 	}
 }

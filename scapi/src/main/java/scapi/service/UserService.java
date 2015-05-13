@@ -6,4 +6,5 @@ public interface UserService {
 	
 	public User getUser(User user);
 	
+	public User getUserById(Integer id);
 }

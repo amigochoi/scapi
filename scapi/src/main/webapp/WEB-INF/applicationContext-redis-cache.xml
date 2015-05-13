@@ -1,0 +1,24 @@
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:cache="http://www.springframework.org/schema/cache"
+  xmlns:c="http://www.springframework.org/schema/c"
+  xmlns:p="http://www.springframework.org/schema/p"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+  <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+        p:use-pool="true" p:hostName="${redis.cache.hostname}" p:port="${redis.cache.port}"
+		p:password="${redis.cache.pass}" />
+
+  <!-- redis template definition -->
+  <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
+    p:connection-factory-ref="jedisConnectionFactory"/>
+
+  <!-- turn on declarative caching -->
+  <cache:annotation-driven />
+
+  <!-- declare Redis Cache Manager -->
+  <bean id="cacheManager" class="org.springframework.data.redis.cache.RedisCacheManager" c:template-ref="redisTemplate">
+  	 <property name="expires" ref="redisCacheTimeMap"/>
+  	 <property name="defaultExpiration" value="${redis.cache.default.cache.second}"/>
+  </bean>
+</beans>

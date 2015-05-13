@@ -25,4 +25,9 @@ public class UserAPIController {
 	public @ResponseBody ResultJson getUser(User user) {
 		return new ResultJson(userService.getUser(user));
 	}
+	
+	@RequestMapping(value = "/getUserById", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResultJson getUserById(Integer id) {
+		return new ResultJson(userService.getUserById(id));
+	}
 }
