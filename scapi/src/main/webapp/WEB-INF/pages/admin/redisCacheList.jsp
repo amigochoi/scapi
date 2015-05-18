@@ -14,7 +14,8 @@
 </head>
 <body ng-controller="RedisCacheListCtrl">
 	<div class="col-md-12">
-		<input type="text" ng-model="searchText.cacheName" class="form-control" placeholder="Cache Name"/>
+		<div class="col-md-6"><h5>Redis Cache List</h5></div>
+		<div class="col-md-6"><input type="text" ng-model="searchText.cacheName" class="form-control" placeholder="Cache Name"/></div>
 		<hr/>
 	</div>
 	

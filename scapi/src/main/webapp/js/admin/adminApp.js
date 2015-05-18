@@ -15,7 +15,7 @@ myApp
 								'url' : 'cacheList'
 							},
 							{
-								'name' : 'Redis cache List',
+								'name' : 'Redis Cache List',
 								'url' : 'redisCacheList'
 							}
 						];
