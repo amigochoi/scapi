@@ -20,26 +20,27 @@
 			type="annotation" />
 	</context:component-scan>
 	<context:annotation-config />
-	
-	<!-- properties related  -->
-	<context:property-placeholder
-			ignore-resource-not-found="true" location="classpath:scapi-*.properties" />
-	<!-- properties used in jsp file -->
-	<util:properties id="propertyConfigurer" 
-                  location="classpath:scapi-init.properties"/>
-    <context:property-placeholder properties-ref="propertyConfigurer" />
-	
-	<!-- ehcache -->
-    <ehcache:annotation-driven cache-manager="ehCacheManager" />
-    <bean id="ehCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"/>
 
+	<!-- properties related -->
+	<context:property-placeholder
+		ignore-resource-not-found="true" location="classpath:scapi-*.properties" />
+	<!-- properties used in jsp file -->
+	<util:properties id="propertyConfigurer" location="classpath:scapi-init.properties" />
+	<context:property-placeholder
+		properties-ref="propertyConfigurer" />
+
+
+	<!-- ehcache , use ehcache first-->
+	<ehcache:annotation-driven cache-manager="ehCacheManager" />
+	<bean id="ehCacheManager"
+		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" />
 	<!-- redis cache -->
 	<import resource="applicationContext-redis-cache.xml" />
 	<import resource="classpath:redis-cache.xml" />
 
 
 	<import resource="aop-other.xml" />
-	
-<!-- 	<import resource="applicationContext-shiro.xml" /> -->
+
+	<!-- <import resource="applicationContext-shiro.xml" /> -->
 
 </beans>

@@ -18,7 +18,7 @@ myApp.controller('CacheListCtrl', function($scope, $http) {
 		if (confirm("Sure to remove All cache in " + cacheName + " ?")) {
 			$http.get("cacheApi/removeCache?cacheName=" + cacheName).success(
 					function(response) {
-						console.debug("removeElement response ", response);
+						console.debug("remove cache response ", response);
 						location.reload(); 
 					});
 		}
@@ -29,7 +29,7 @@ myApp.controller('CacheListCtrl', function($scope, $http) {
 		if (confirm("Sure to remove cache element  " + cacheKey + " ?")) {
 			$http.get("cacheApi/removeElement?cacheName=" + $scope.cacheName + "&cacheKey=" + cacheKey).success(
 					function(response) {
-						console.debug("removeCache response ", response);
+						console.debug("remove element response ", response);
 						location.reload(); 
 					});
 		}

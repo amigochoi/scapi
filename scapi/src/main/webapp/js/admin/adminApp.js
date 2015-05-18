@@ -13,6 +13,10 @@ myApp
 							{
 								'name' : 'Ehcache List',
 								'url' : 'cacheList'
+							},
+							{
+								'name' : 'Redis cache List',
+								'url' : 'redisCacheList'
 							}
 						];
 

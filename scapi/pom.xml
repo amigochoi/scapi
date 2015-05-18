@@ -338,7 +338,7 @@
 				<version>2.1.1</version>
 				<configuration>
 					<outputDirectory>release</outputDirectory>
-					<warName>sccms-${rp.build.warname}</warName>
+					<warName>scapi-${rp.build.warname}</warName>
 				</configuration>
 			</plugin>
 

@@ -12,8 +12,8 @@
 		maxElementsInMemory="2000" 
 		memoryStoreEvictionPolicy="LFU" 
 		eternal="false"
-		timeToIdleSeconds="1000" 
-		timeToLiveSeconds="1000" 
+		timeToIdleSeconds="10" 
+		timeToLiveSeconds="10" 
 		overflowToDisk="false" 
 		diskPersistent="false" />
 	
@@ -21,8 +21,8 @@
 		maxElementsInMemory="2000" 
 		memoryStoreEvictionPolicy="LFU" 
 		eternal="false"
-		timeToIdleSeconds="1000" 
-		timeToLiveSeconds="1000" 
+		timeToIdleSeconds="10" 
+		timeToLiveSeconds="10" 
 		overflowToDisk="false" 
 		diskPersistent="false" />
 </ehcache>

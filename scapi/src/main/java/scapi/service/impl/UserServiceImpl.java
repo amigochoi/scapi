@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
 	
 //  keyGenerator = @KeyGenerator(name = "StringCacheKeyGenerator"),,decoratedCacheType=DecoratedCacheType.REFRESHING_SELF_POPULATING_CACHE,refreshInterval=1000*60
 	@Cacheable(cacheName = "userCache", keyGenerator = @KeyGenerator(name = "StringCacheKeyGenerator"), cacheNull = false)
-	@org.springframework.cache.annotation.Cacheable("userCache")
+	@org.springframework.cache.annotation.Cacheable(value = "userCache", unless="#result == null")
 	@Override
 	public User getUser(User user) {
 		// TODO Auto-generated method stub
@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
 
 	//@CachePut(value = "user", key = "#id")
 	@Cacheable(cacheName = "userCache", keyGenerator = @KeyGenerator(name = "StringCacheKeyGenerator"), cacheNull = false)
-	@org.springframework.cache.annotation.Cacheable(value = "userCache", key = "#id" )
+	@org.springframework.cache.annotation.Cacheable(value = "userCache", key = "#id", unless="#result == null")
 	@Override
 	public User getUserById(Integer id) {
 		// TODO Auto-generated method stub

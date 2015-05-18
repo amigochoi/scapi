@@ -8,14 +8,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class AdminViewController {
 	
-	@RequestMapping(value = "/menu", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/menu", method = RequestMethod.GET)
 	public String viewAdminMenu(){
 		return "menu";		
 	}
 	
-	@RequestMapping(value = "/cacheList", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/cacheList", method = RequestMethod.GET)
 	public String viewCacheList(){
 		return "cacheList";		
 	}
 	
+	@RequestMapping(value = "/redisCacheList", method = RequestMethod.GET)
+	public String viewRedisCacheList(){
+		return "redisCacheList";		
+	}	
 }
