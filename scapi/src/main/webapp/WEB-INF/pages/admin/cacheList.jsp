@@ -40,7 +40,7 @@
 				<td>{{item.liveSeconds}}</td>
 				<td>{{item.sizeOfMomery}}</td>
 				<td>{{item.inMemorySize}}</td>
-				<td><i class="fa fa-file" style="color: blue; cursor: pointer"
+				<td><i class="fa fa-eye" style="cursor: pointer"
 					ng-click="viewCacheElement(item['cacheName'])"></i> <i
 					class="fa fa-times" style="color: red; cursor: pointer"
 					ng-click="deleteCache(item['cacheName'])"></i></td>

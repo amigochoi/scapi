@@ -11,7 +11,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.Cache;
+import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.cache.RedisCacheManager;
+import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.data.redis.core.RedisCallback;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
 import scapi.admin.model.CacheDisplay;
@@ -22,6 +27,9 @@ public class RedisCacheMonitoringService {
 
 	@Autowired
 	private RedisCacheManager cacheManager;
+
+	@Autowired
+	RedisTemplate<?, ?> redisTemplate;
 
 	@Resource(name = "redisCacheTimeMap")
 	Map<String, String> redisCacheTimeMap;
@@ -43,7 +51,6 @@ public class RedisCacheMonitoringService {
 		if (cache != null) {
 			cache.clear();
 		}
-
 	}
 
 	public List<CacheDisplay> getAllCache() {
@@ -54,10 +61,29 @@ public class RedisCacheMonitoringService {
 			CacheDisplay cacheDisplay = new CacheDisplay();
 			if (cache != null) {
 				cacheDisplay.setCacheName(cache.getName());
+				cacheDisplay.setNumberOfElements(this.getCacheNumberCount(cache.getName()));
+				cacheDisplay.setLiveSeconds(Long.valueOf(entry.getValue()));
 			}
 			cacheDisplayList.add(cacheDisplay);
 		}
 		return cacheDisplayList;
+	}
+
+	public Integer getCacheNumberCount(String cacheName) {
+		final Object key = cacheName + "~keys";
+		Long count = (Long) redisTemplate.execute(new RedisCallback<Long>() {
+
+			@Override
+			public Long doInRedis(RedisConnection connection) throws DataAccessException {
+				return connection.zCard(potentiallyExtractBytes(key));
+			}
+
+			private byte[] potentiallyExtractBytes(Object key) {
+				return (key instanceof byte[]) ? (byte[]) key : key.toString().getBytes();
+			}
+
+		});
+		return  count != null ? count.intValue() : null;
 	}
 
 }

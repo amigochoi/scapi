@@ -48,6 +48,8 @@ public class CacheAPIController {
 		return true;
 	}
 
+//	redis related API
+	
 	@RequestMapping(value = "/getAllRedisCacheDisplayList", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody List<CacheDisplay> getAllRedisCacheDisplayList() {
 		return redisCacheMonitoringService.getAllCache();
