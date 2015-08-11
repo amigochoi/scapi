@@ -3,12 +3,23 @@
 <title>API List</title>
 <script src="../js/angular.min.js"></script>
 <script src="../js/apiListApp.js"></script>
+<script src="../js/jquery-2.1.1.min.js"></script>
 <link rel="stylesheet" href="../css/bootstrap.css">
+<script>
+	$(function() {
+		$(".fakeBtn, .apiList").mouseover(function() {
+			$(this).css("cursor", "pointer");
+		}).onmouseout(function() {
+			$(this).css("cursor", "default");
+		})
+
+	})
+</script>
 </head>
 <body ng-controller="ApiListCtrl" data-ng-init="updateAPI()">
 	<div class="col-md-12">
 		<div class="btn-groups-toolbar">
-			<h3>API List</h3>
+			<h3 class="fakeBtn" ng-click="showAllParams()">API List</h3>
 		</div>
 	</div>
 
@@ -16,18 +27,23 @@
 		<form class="form-horizontal">
 			<div class="form-group form-group-sm"
 				ng-repeat="(key, value) in param">
-				<label for="{{key}}" class="col-sm-6 control-label">{{key}}</label>
-				<div class="col-sm-6">
-					<input type="text" class="input-sm form-control"
-						ng-model="param[key]" ng-change="updateAPI();"/>
+				<div id="{{key}}" class="keyList">
+					<label for="{{key}}" class="col-sm-6 control-label">{{key}}</label>
+					<div class="col-sm-6">
+						<input type="text" class="input-sm form-control"
+							ng-model="param[key]" ng-change="updateAPI();" />
+					</div>
+					<div style="height:1px;clear:both"></div>
 				</div>
 			</div>
 		</form>
 	</div>
 	<div class="col-md-6">
 		<ul>
-			<li ng-repeat="api in showApiList"><a href="{{api.url}}"
-				target="_blank">{{api.name}}</a><br /> <small>{{api.url}}</small></li>
+			<li ng-repeat="api in showApiList" class="apiList"><div
+					ng-click="showCurrentParam(api['params'])">
+					<a href="{{api.url}}" target="_blank">{{api.name}}</a><br /> <small>{{api.url}}</small>
+				</div></li>
 		</ul>
 	</div>
 </body>
