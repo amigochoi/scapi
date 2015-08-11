@@ -41,8 +41,8 @@ public class ControllerIntercepter {
 		ResultJson cbjson = new ResultJson();
 		try {
 			cbjson = (ResultJson) pjp.proceed();
-			cbjson.setResultCode(0);
-			cbjson.setSuccess(true);
+			//cbjson.setResultCode(0);
+			//cbjson.setSuccess(true);
 		} catch (Exception ex) {
 			log.error("exception",ex);
 			// success callback AOP
