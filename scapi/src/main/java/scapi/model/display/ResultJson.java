@@ -1,37 +1,24 @@
 package scapi.model.display;
 
 import java.io.Serializable;
-import java.util.Date;
 
+import scapi.model.User;
 import lombok.Data;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Data
 public class ResultJson implements Serializable {
-	
-	public ResultJson() {
-		// TODO Auto-generated constructor stub
-	}
-	
-	public ResultJson(Object obj) {
-		// TODO Auto-generated constructor stub
-		this.dataObject = obj;
-	}
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	private Boolean success = false;
-	private Integer resultCode = -1;
-	private Object dataObject;
-	private String message = "";
-	private String exceptionMsg = "";
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss",timezone="Hongkong")
-	private Date responseDateTime;
-	private String responseServer;
+	Object data;
+	ResultMeta meta;
+	ResultPagination pageination;
 	
+	public ResultJson(){
+		
+	}
+	
+	public ResultJson(Object data, Integer resultCode, String resultMessage, ResultPagination pageination) {
+		this.data = data;
+		this.meta = new ResultMeta(resultCode, resultMessage);
+		this.pageination = pageination;
+	}
 }

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 
 import scapi.model.display.ResultJson;
+import scapi.model.display.ResultMeta;
 
 @Component("controllerIntercepter")
 @Slf4j
@@ -41,16 +42,9 @@ public class ControllerIntercepter {
 		ResultJson cbjson = new ResultJson();
 		try {
 			cbjson = (ResultJson) pjp.proceed();
-			//cbjson.setResultCode(0);
-			//cbjson.setSuccess(true);
 		} catch (Exception ex) {
 			log.error("exception",ex);
-			// success callback AOP
-			cbjson.setResultCode(-1);
-			cbjson.setSuccess(false);
-		}finally{
-			cbjson.setResponseDateTime(new Date());
-			cbjson.setResponseServer(env);
+			cbjson.setMeta(new ResultMeta(8000,"FAIL : UNKNOWN ERROR"));
 		}
 		stopWatch.stop();
 		log.info("[{} Log] \t{}.{} \tEND\t{} ms{}", logType, pjp.getTarget().getClass().getName(), pjp.getSignature().getName(), stopWatch.getTotalTimeMillis(),

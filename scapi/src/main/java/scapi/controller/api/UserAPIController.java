@@ -23,11 +23,11 @@ public class UserAPIController {
 	// consumes = MediaType.APPLICATION_JSON_VALUE,
 	@RequestMapping(value = "/getUser", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResultJson getUser(User user) {
-		return new ResultJson(userService.getUser(user));
+		return new ResultJson(userService.getUser(user),1000,"success",null);
 	}
 	
 	@RequestMapping(value = "/getUserById", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResultJson getUserById(Integer id) {
-		return new ResultJson(userService.getUserById(id));
+		return new ResultJson(userService.getUserById(id),1000,"success",null);
 	}
 }
