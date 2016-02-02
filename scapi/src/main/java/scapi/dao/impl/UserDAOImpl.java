@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import scapi.dao.UserDAO;
-import scapi.model.User;
+import scapi.model.domain.User;
 
 @Repository("userDAO")
 @Slf4j

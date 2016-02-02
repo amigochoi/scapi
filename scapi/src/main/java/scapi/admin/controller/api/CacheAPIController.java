@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import scapi.admin.model.CacheDisplay;
 import scapi.admin.model.CacheElementDisplay;
 import scapi.admin.service.CacheMonitoringService;
-import scapi.admin.service.RedisCacheMonitoringService;
 
 @Controller
 @RequestMapping("/cacheApi")
@@ -21,8 +20,8 @@ public class CacheAPIController {
 	@Autowired
 	private CacheMonitoringService cacheMonitoringService;
 	
-	@Autowired
-	private RedisCacheMonitoringService redisCacheMonitoringService;
+/*	@Autowired
+	private RedisCacheMonitoringService redisCacheMonitoringService;*/
 			
 	@RequestMapping(value = "/getAllCacheDisplayList", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody List<CacheDisplay> getAllCacheDisplayList() {
@@ -50,7 +49,7 @@ public class CacheAPIController {
 
 //	redis related API
 	
-	@RequestMapping(value = "/getAllRedisCacheDisplayList", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+/*	@RequestMapping(value = "/getAllRedisCacheDisplayList", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody List<CacheDisplay> getAllRedisCacheDisplayList() {
 		return redisCacheMonitoringService.getAllCache();
 	}
@@ -60,5 +59,5 @@ public class CacheAPIController {
 		redisCacheMonitoringService.clearCache(cacheName);
 		return true;
 	}
-	
+	*/
 }

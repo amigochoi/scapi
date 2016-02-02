@@ -1,10 +1,11 @@
 package scapi.service;
 
-import scapi.model.User;
+import scapi.model.display.ResultJson;
+import scapi.model.domain.User;
 
 public interface UserService {
 	
-	public User getUser(User user);
+	public ResultJson getUser(User user);
 	
-	public User getUserById(Integer id);
+	public ResultJson getUserById(Integer id);
 }

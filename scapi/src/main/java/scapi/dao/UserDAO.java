@@ -1,6 +1,6 @@
 package scapi.dao;
 
-import scapi.model.User;
+import scapi.model.domain.User;
 
 
 public interface UserDAO {

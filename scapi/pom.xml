@@ -212,6 +212,24 @@
 			<artifactId>jedis</artifactId>
 			<version>2.6.1</version>
 		</dependency>
+		
+		<!-- api doc -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.3.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>19.0</version>
+		</dependency>
 	</dependencies>
 
 	<!-- set different profile, default local -->
@@ -233,6 +251,7 @@
 						<includes>
 							<include>*.properties</include>
 							<include>*.xml</include>
+							<include>*.vm</include>
 						</includes>
 					</resource>
 				</resources>
@@ -254,11 +273,124 @@
 						<includes>
 							<include>*.properties</include>
 							<include>*.xml</include>
+							<include>*.vm</include>
 						</includes>
 					</resource>
 				</resources>
 			</build>
 		</profile>
+		<profile>
+			<id>uat_local</id>
+			<properties>
+				<rp.build.warname>uat_local</rp.build.warname>
+			</properties>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<resources>
+					<resource>
+						<directory>src/main/resources/uat_local</directory>
+						<filtering>true</filtering>
+						<includes>
+							<include>*.properties</include>
+							<include>*.xml</include>
+							<include>*.vm</include>
+						</includes>
+					</resource>
+				</resources>
+			</build>
+		</profile>
+		<profile>
+			<id>cn_uat_aws</id>
+			<properties>
+				<rp.build.warname>cn_uat_aws</rp.build.warname>
+			</properties>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<resources>
+					<resource>
+						<directory>src/main/resources/cn_uat_aws</directory>
+						<filtering>true</filtering>
+						<includes>
+							<include>*.properties</include>
+							<include>*.xml</include>
+							<include>*.vm</include>
+						</includes>
+					</resource>
+				</resources>
+			</build>
+		</profile>
+		<profile>
+			<id>uat_aws</id>
+			<properties>
+				<rp.build.warname>uat_aws</rp.build.warname>
+			</properties>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<resources>
+					<resource>
+						<directory>src/main/resources/uat_aws</directory>
+						<filtering>true</filtering>
+						<includes>
+							<include>*.properties</include>
+							<include>*.xml</include>
+							<include>*.vm</include>
+						</includes>
+					</resource>
+				</resources>
+			</build>
+		</profile>
+		<profile>
+			<id>preprod_aws</id>
+			<properties>
+				<rp.build.warname>preprod_aws</rp.build.warname>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+				<resources>
+					<resource>
+						<directory>src/main/resources/preprod_aws</directory>
+						<filtering>true</filtering>
+						<includes>
+							<include>*.properties</include>
+							<include>*.xml</include>
+							<include>*.vm</include>
+						</includes>
+					</resource>
+				</resources>
+			</build>
+		</profile>
+
+		<profile>
+			<id>prod_aws</id>
+			<properties>
+				<rp.build.warname>prod_aws</rp.build.warname>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+				<resources>
+					<resource>
+						<directory>src/main/resources/prod_aws</directory>
+						<filtering>true</filtering>
+						<includes>
+							<include>*.properties</include>
+							<include>*.xml</include>
+							<include>*.vm</include>
+						</includes>
+					</resource>
+				</resources>
+			</build>
+		</profile>
+
 		<profile>
 			<id>prod</id>
 			<properties>
@@ -275,6 +407,7 @@
 						<includes>
 							<include>*.properties</include>
 							<include>*.xml</include>
+							<include>*.vm</include>
 						</includes>
 					</resource>
 				</resources>

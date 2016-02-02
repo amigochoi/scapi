@@ -1,6 +1,8 @@
 package scapi.common.aop;
 
-import java.util.Date;
+import java.util.HashMap;
+
+import javax.annotation.Resource;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 
+import scapi.common.constant.APIConstant;
 import scapi.model.display.ResultJson;
 import scapi.model.display.ResultMeta;
 
@@ -21,7 +24,10 @@ public class ControllerIntercepter {
 	// for API request only with ResultJson
 	@Value("${project.environment}")
 	String env;
-
+	
+	@Resource(name="resultCodeMap")
+	HashMap<Integer, String> resultCodeMap;
+	
 	public ResultJson controllerPointCutMethod(ProceedingJoinPoint pjp) throws Throwable {
 		return logMethod(pjp, "CONTROLLER", 5000);
 	}
@@ -42,9 +48,12 @@ public class ControllerIntercepter {
 		ResultJson cbjson = new ResultJson();
 		try {
 			cbjson = (ResultJson) pjp.proceed();
+			if(cbjson!= null && cbjson.getMeta() != null && cbjson.getMeta().getResultMessage() == null){
+				cbjson.setMeta(new ResultMeta(cbjson.getMeta().getResultCode(), resultCodeMap.get(cbjson.getMeta().getResultCode()) ));
+			}	
 		} catch (Exception ex) {
-			log.error("exception",ex);
-			cbjson.setMeta(new ResultMeta(8000,"FAIL : UNKNOWN ERROR"));
+			log.error("EXCEPTION",ex);
+			cbjson.setMeta(new ResultMeta(APIConstant.UnknowFail, resultCodeMap.get(APIConstant.UnknowFail)));
 		}
 		stopWatch.stop();
 		log.info("[{} Log] \t{}.{} \tEND\t{} ms{}", logType, pjp.getTarget().getClass().getName(), pjp.getSignature().getName(), stopWatch.getTotalTimeMillis(),

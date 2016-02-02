@@ -5,8 +5,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import scapi.common.constant.APIConstant;
 import scapi.dao.UserDAO;
-import scapi.model.User;
+import scapi.model.display.ResultJson;
+import scapi.model.domain.User;
+import scapi.model.dto.UserDTO;
 import scapi.service.UserService;
 
 import com.googlecode.ehcache.annotations.Cacheable;
@@ -21,19 +24,19 @@ public class UserServiceImpl implements UserService {
 	
 //  keyGenerator = @KeyGenerator(name = "StringCacheKeyGenerator"),,decoratedCacheType=DecoratedCacheType.REFRESHING_SELF_POPULATING_CACHE,refreshInterval=1000*60
 	@Cacheable(cacheName = "userCache", keyGenerator = @KeyGenerator(name = "StringCacheKeyGenerator"), cacheNull = false)
-	@org.springframework.cache.annotation.Cacheable(value = "userCache", unless="#result == null")
+/*	@org.springframework.cache.annotation.Cacheable(value = "userCache", unless="#result == null")*/
 	@Override
-	public User getUser(User user) {
+	public ResultJson getUser(User user) {
 		// TODO Auto-generated method stub
-		return userDAO.getUser(user);
+		return new ResultJson(APIConstant.Success, new UserDTO(userDAO.getUser(user)));
 	}
 
 	//@CachePut(value = "user", key = "#id")
 	@Cacheable(cacheName = "userCache", keyGenerator = @KeyGenerator(name = "StringCacheKeyGenerator"), cacheNull = false)
-	@org.springframework.cache.annotation.Cacheable(value = "userCache", key = "#id", unless="#result == null")
+/*	@org.springframework.cache.annotation.Cacheable(value = "userCache", key = "#id", unless="#result == null")*/
 	@Override
-	public User getUserById(Integer id) {
+	public ResultJson getUserById(Integer id) {
 		// TODO Auto-generated method stub
-		return userDAO.getUserById(id);
+		return new ResultJson(APIConstant.Success,new UserDTO(userDAO.getUserById(id)));
 	}
 }
