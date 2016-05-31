@@ -13,14 +13,14 @@ import org.springframework.util.StopWatch;
 public class OtherIntercepter {
 
 	public Object servicesPointCutMethod(ProceedingJoinPoint pjp) throws Throwable {
-		return logMethod(pjp,"SERVICE",5000);
+		return logMethod(pjp,"SERVICE");
 	}
 
 	public Object repositoryPointCutMethod(ProceedingJoinPoint pjp) throws Throwable {
-		return logMethod(pjp,"DAO",3000);
+		return logMethod(pjp,"DAO");
 	}
 	
-	public Object logMethod(ProceedingJoinPoint pjp,String logType,long slowLimitTime) throws Throwable{
+	public Object logMethod(ProceedingJoinPoint pjp,String logType) throws Throwable{
 		//LoggingStopWatch perfStopWatch = null;
 	  	//perfStopWatch = new Log4JStopWatch(org.apache.log4j.Logger.getLogger(Log4JStopWatch.class));
 		StopWatch stopWatch = new StopWatch();
@@ -35,7 +35,7 @@ public class OtherIntercepter {
 		log.info("[{} Log] \t{}.{} \tSTART : [{}]",logType, pjp.getTarget().getClass().getName(),pjp.getSignature().getName(),args );
 		Object cbObj = pjp.proceed();
 		stopWatch.stop();
-		log.info("[{} Log] \t{}.{} \tEND\t{} ms{}",logType, pjp.getTarget().getClass().getName(),pjp.getSignature().getName(),stopWatch.getTotalTimeMillis(),(stopWatch.getTotalTimeMillis() > slowLimitTime ? "SLOW" : ""));
+		log.info("[{} Log] \t{}.{} \tEND\t{} ms",logType, pjp.getTarget().getClass().getName(),pjp.getSignature().getName(),stopWatch.getTotalTimeMillis());
 		//perfStopWatch.stop(pjp.getTarget().getClass().getName() + "." + pjp.getSignature().getName());
 		return cbObj;
 	}
