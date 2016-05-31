@@ -7,67 +7,18 @@
 	
 	<util:map id="resultCodeMap" map-class="java.util.HashMap" key-type="java.lang.Integer" value-type="java.lang.String">
    		<!-- normal success flow  -->
-   		<entry key="1000" value="SUCCESS" />
+   		<entry key="200" value="" />
    		
-   		<!-- validation error flow -->
-   		<entry key="2001" value="FAIL : Invalid Field Null or Empty : smsCode" />
-   		<entry key="2002" value="FAIL : Invalid Field Null or Empty : mobile" />
-   		<entry key="2003" value="FAIL : Invalid Field Null or Empty : password" />
-   		<entry key="2004" value="FAIL : Invalid Field Null or Empty : platform" />
-   		<entry key="2005" value="FAIL : Invalid Field Null or Empty : deviceId" />
-   		<entry key="2006" value="FAIL : Invalid Field Null or Empty : deviceModel" /> 		
-   		<!-- <entry key="2007" value="FAIL : Invalid Field Null or Empty : brand" /> -->
-   		<entry key="2008" value="FAIL : Invalid Field Null or Empty : appId" />
-   		<entry key="2009" value="FAIL : Invalid Field Null or Empty : appVersion" />
-   		<entry key="2010" value="FAIL : Invalid Field Null or Empty : systemVersion" />
-   		<entry key="2011" value="FAIL : Invalid Field Null or Empty : areaCode" />
-		
-		<entry key="2012" value="FAIL : Invalid Field Null or Empty : memberId" />
-		<entry key="2013" value="FAIL : Invalid Field Null or Empty : token" />
-		
-		<entry key="2014" value="FAIL : Invalid Numberic Format : memberId" />
-		
-		<entry key="2015" value="FAIL : Invalid Field Null or Empty : old password" />
-		<entry key="2016" value="FAIL : Invalid Field Null or Empty : new password" />
-		<entry key="2017" value="FAIL : New password is same as old password" />
-		<entry key="2018" value="FAIL : Invalid Field Null or Empty : login" />
-		<entry key="2019" value="FAIL : Invalid Field Null or Empty : type" />
-		<entry key="2020" value="FAIL : Invalid Field Value: type" />
-		<entry key="2021" value="FAIL : Invalid Field Null or Empty : systemType" />
-		<entry key="2022" value="FAIL : Invalid Field Null or Empty : loginName" />
-		<entry key="2023" value="FAIL : Invalid Field Value: platform" />
-		<entry key="2024" value="FAIL : Invalid Format : loginName" />
-		<!-- unknown error -->
-		<entry key="8000" value="FAIL : UNKNOWN ERROR"/>
-		<!--  database related error flow -->
-		<entry key="9000" value="FAIL : Database Error" />
-		<entry key="9001" value="FAIL : No SMS record is Found" />
-		<entry key="9002" value="FAIL : SMS Code is Not match" />
-		<entry key="9003" value="FAIL : Member mobile has already existed" />
-		<entry key="9004" value="FAIL : mobile phone has not been registered" />
-		<entry key="9005" value="FAIL : Either MemberId or Password is incorrect" />
-		<entry key="9006" value="FAIL : record is not yet updated" />
-		<entry key="9007" value="FAIL : Member is not existed" />
-		<entry key="9008" value="FAIL : Member is currently not logged in" />
-		<entry key="9009" value="FAIL : record is not yet deleted" />
-		<entry key="9010" value="FAIL : Either login or password is incorrect" />
-		
-		<entry key="9012" value="FAIL : Record is not found" />
-		<entry key="9013" value="FAIL : SMS cannot be sent" />
-		<entry key="9014" value="FAIL : Token Status is Inactive" />
-		<entry key="9015" value="FAIL : Login Name is already existed" />
-		<entry key="9016" value="FAIL : Too many failed login attempts" />
-		
+   		<entry key="4001" value="FAIL : validation error" />
+   		<entry key="4004" value="FAIL : no record is found" />
+   		
+   		<entry key="5000" value="FAIL : system error" />
+   		<entry key="5001" value="FAIL : database error" />
+   		<entry key="5002" value="FAIL : update is failed" />
+   		<entry key="5003" value="FAIL : remove is failed" />
+
 	</util:map>
 	
-	<util:list id="smsTypeList" value-type="java.lang.String">
-		<value>FORGETPW</value>
-		<value>REGISTER</value>
-	</util:list>
-	
-	<util:list id="platformList" value-type="java.lang.String">
-		<value>MOBILE</value>
-		<value>WEB</value>
-	</util:list>
+
 	
 </beans>

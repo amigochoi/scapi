@@ -35,7 +35,7 @@ public class SwaggerConfig {
 	}
 
 	private ApiInfo apiInfo() {
-		return new ApiInfoBuilder().title("MST MemberShip API SPEC")
+		return new ApiInfoBuilder().title("API SPEC")
 				.description("SPI SPEC").contact("Eddie LI").version("1.2")
 				.build();
 	}

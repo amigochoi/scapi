@@ -26,9 +26,9 @@ public class UserServiceImpl implements UserService {
 	@Cacheable(cacheName = "userCache", keyGenerator = @KeyGenerator(name = "StringCacheKeyGenerator"), cacheNull = false)
 /*	@org.springframework.cache.annotation.Cacheable(value = "userCache", unless="#result == null")*/
 	@Override
-	public ResultJson getUser(User user) {
+	public ResultJson getUser(UserDTO userDTO) {
 		// TODO Auto-generated method stub
-		return new ResultJson(APIConstant.Success, new UserDTO(userDAO.getUser(user)));
+		return new ResultJson(APIConstant.Success, new UserDTO(userDAO.getUser(new User(userDTO))));
 	}
 
 	//@CachePut(value = "user", key = "#id")
