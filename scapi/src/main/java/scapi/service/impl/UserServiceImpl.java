@@ -14,6 +14,7 @@ import scapi.dao.UserDAO;
 import scapi.model.display.ResultJson;
 import scapi.model.domain.User;
 import scapi.model.dto.UserDTO;
+import scapi.model.dto.UsersDTO;
 import scapi.service.UserService;
 
 
@@ -28,12 +29,14 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public ResultJson getUsers(UserDTO userDTO) {
 		ModelMapper modelMapper = new ModelMapper();
-		List<User> users = userDAO.getUsers(modelMapper.map(userDTO, User.class));
+		User userParam =  modelMapper.map(userDTO, User.class);
+		List<User> users = userDAO.getUsers(userParam);
 	    List<UserDTO> userDTOs = modelMapper.map(users,  new TypeToken<List<UserDTO>>() {}.getType());
+	    
 	    if(userDTOs == null)
 	    	return new ResultJson(APIConstant.UnfoundFail); 
 	    else
-	    	return new ResultJson(APIConstant.Success, userDTOs);
+	    	return new ResultJson(APIConstant.Success, new UsersDTO(userDTOs,userDAO.getUsersCount(userParam)));
 	}
 
 //	@Cacheable(cacheName = "getUser", keyGenerator = @KeyGenerator(name = "StringCacheKeyGenerator"), cacheNull = false)

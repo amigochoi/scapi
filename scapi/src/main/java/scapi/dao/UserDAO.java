@@ -6,7 +6,11 @@ import scapi.model.domain.User;
 
 
 public interface UserDAO {
+	
+	
 	public List<User> getUsers(User user);
+	
+	public int getUsersCount(User user);
 	
 	public User getUser(Integer id);
 	

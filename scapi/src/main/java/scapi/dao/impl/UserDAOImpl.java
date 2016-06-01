@@ -22,7 +22,12 @@ public class UserDAOImpl implements UserDAO{
 		users.add(new User(4,"sc4","sc4@gmail.com","66666664"));
 		return users;
 	}
-
+	
+	@Override
+	public int getUsersCount(User user) {
+		return 0;
+	}
+	
 	@Override
 	public User getUser(Integer id) {
 		// TODO Auto-generated method stub
@@ -35,6 +40,8 @@ public class UserDAOImpl implements UserDAO{
 	public User create(User user) {
 		return user;
 	}
+
+
 
 
 }
