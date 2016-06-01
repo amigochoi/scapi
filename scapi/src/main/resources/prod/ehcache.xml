@@ -8,7 +8,7 @@
 		overflowToDisk="false" 
 		diskPersistent="false"/>
 		
-	<cache name="userCache" 
+	<cache name="getUsers" 
 		maxElementsInMemory="2000" 
 		memoryStoreEvictionPolicy="LFU" 
 		eternal="false"
@@ -17,7 +17,7 @@
 		overflowToDisk="false" 
 		diskPersistent="false" />
 	
-	<cache name="productCache" 
+	<cache name="getUser" 
 		maxElementsInMemory="2000" 
 		memoryStoreEvictionPolicy="LFU" 
 		eternal="false"

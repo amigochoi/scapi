@@ -26,12 +26,8 @@ public class ControllerIntercepter {
 	@Resource(name="resultCodeMap")
 	HashMap<Integer, String> resultCodeMap;
 	
-	public ResponseEntity<ResultJson> controllerPointCutMethod(ProceedingJoinPoint pjp) throws Throwable {
-		return logMethod(pjp, "CONTROLLER");
-	}
-
 	@SuppressWarnings("unchecked")
-	public ResponseEntity<ResultJson> logMethod(ProceedingJoinPoint pjp, String logType) throws Throwable {
+	public ResponseEntity<ResultJson> controllerPointCutMethod(ProceedingJoinPoint pjp) throws Throwable {
 //		LoggingStopWatch perfStopWatch = null;
 //		perfStopWatch = new Log4JStopWatch(org.apache.log4j.Logger.getLogger(Log4JStopWatch.class));
 		StopWatch stopWatch = new StopWatch();
@@ -43,28 +39,30 @@ public class ControllerIntercepter {
 		}
 
 		args = args.length() > 0 ? args.substring(0,args.length() - 1) : args;
-		log.info("[{} Log] \t{}.{} \tSTART : [{}]", logType, pjp.getTarget().getClass().getName(), pjp.getSignature().getName(),args);
+		log.info("[Controller Log] \t{}.{} \tSTART : [{}]", pjp.getTarget().getClass().getName(), pjp.getSignature().getName(),args);
 		
 		ResultJson cbjson = new ResultJson();
 		HttpStatus httpStatus;
 		try {
 			ResponseEntity<ResultJson> responseEntity = (ResponseEntity<ResultJson>) pjp.proceed();
-			
+
 			cbjson = responseEntity.getBody();
-			if(cbjson!= null && cbjson.getMeta() != null && cbjson.getMeta().getResultMessage() == null){
-				cbjson.setMeta(new ResultMeta(cbjson.getMeta().getResultCode(), resultCodeMap.get(cbjson.getMeta().getResultCode()),cbjson.getMeta().getResultErrors() ));
+			if(cbjson!= null && cbjson.getMeta() != null && cbjson.getMeta().getMessage() == null){
+				cbjson.setMeta(new ResultMeta(cbjson.getMeta().getCode(), resultCodeMap.get(cbjson.getMeta().getCode()),cbjson.getMeta().getErrors() ));
 			}
-			httpStatus = responseEntity.getStatusCode();
+			
+			httpStatus = APIConstant.UnfoundFail.equals(cbjson.getMeta().getCode()) ? HttpStatus.NOT_FOUND : responseEntity.getStatusCode();
 		} catch (Exception ex) {
-			log.error("EXCEPTION",ex);
-			httpStatus = HttpStatus.BAD_REQUEST;
+			log.error(ex.getMessage(),ex);
+			httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
 			cbjson.setMeta(new ResultMeta(APIConstant.UnknowFail, resultCodeMap.get(APIConstant.UnknowFail)));
 		}
 		stopWatch.stop();
-		log.info("[{} Log] \t{}.{} \tEND\t{} ms", logType, pjp.getTarget().getClass().getName(), pjp.getSignature().getName(), stopWatch.getTotalTimeMillis());
+		log.info("[Controller Log] \t{}.{} \tEND\t{} ms", pjp.getTarget().getClass().getName(), pjp.getSignature().getName(), stopWatch.getTotalTimeMillis());
 		//perfStopWatch.stop(pjp.getTarget().getClass().getName() + "." + pjp.getSignature().getName());
 		
 		return ResponseEntity.status(httpStatus).body(cbjson);
 	}
+
 
 }

@@ -5,7 +5,9 @@ import scapi.model.dto.UserDTO;
 
 public interface UserService {
 	
-	public ResultJson getUser(UserDTO userDTO);
+	public ResultJson getUsers(UserDTO userDTO);
 	
-	public ResultJson getUserById(Integer id);
+	public ResultJson getUser(Integer id);
+	
+	public ResultJson create(UserDTO userDTO);
 }

@@ -1,7 +1,11 @@
 package scapi.service.impl;
 
-import lombok.extern.slf4j.Slf4j;
+import java.util.List;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,31 +16,39 @@ import scapi.model.domain.User;
 import scapi.model.dto.UserDTO;
 import scapi.service.UserService;
 
-import com.googlecode.ehcache.annotations.Cacheable;
-import com.googlecode.ehcache.annotations.KeyGenerator;
 
 @Service("userService")
-@Slf4j
 public class UserServiceImpl implements UserService {
 
 	@Autowired
 	UserDAO userDAO;
 	
-//  keyGenerator = @KeyGenerator(name = "StringCacheKeyGenerator"),,decoratedCacheType=DecoratedCacheType.REFRESHING_SELF_POPULATING_CACHE,refreshInterval=1000*60
-	@Cacheable(cacheName = "userCache", keyGenerator = @KeyGenerator(name = "StringCacheKeyGenerator"), cacheNull = false)
-/*	@org.springframework.cache.annotation.Cacheable(value = "userCache", unless="#result == null")*/
+//	@Cacheable(cacheName = "getUsers", keyGenerator = @KeyGenerator(name = "StringCacheKeyGenerator"), cacheNull = false)
+//	@org.springframework.cache.annotation.Cacheable(value = "getUsers", unless="#result == null")
 	@Override
-	public ResultJson getUser(UserDTO userDTO) {
-		// TODO Auto-generated method stub
-		return new ResultJson(APIConstant.Success, new UserDTO(userDAO.getUser(new User(userDTO))));
+	public ResultJson getUsers(UserDTO userDTO) {
+		ModelMapper modelMapper = new ModelMapper();
+		List<User> users = userDAO.getUsers(modelMapper.map(userDTO, User.class));
+	    List<UserDTO> userDTOs = modelMapper.map(users,  new TypeToken<List<UserDTO>>() {}.getType());
+	    if(userDTOs == null)
+	    	return new ResultJson(APIConstant.UnfoundFail); 
+	    else
+	    	return new ResultJson(APIConstant.Success, userDTOs);
 	}
 
-	//@CachePut(value = "user", key = "#id")
-	@Cacheable(cacheName = "userCache", keyGenerator = @KeyGenerator(name = "StringCacheKeyGenerator"), cacheNull = false)
-/*	@org.springframework.cache.annotation.Cacheable(value = "userCache", key = "#id", unless="#result == null")*/
+//	@Cacheable(cacheName = "getUser", keyGenerator = @KeyGenerator(name = "StringCacheKeyGenerator"), cacheNull = false)
+//	@org.springframework.cache.annotation.Cacheable(value = "getUser", key = "#id", unless="#result == null")
 	@Override
-	public ResultJson getUserById(Integer id) {
-		// TODO Auto-generated method stub
-		return new ResultJson(APIConstant.Success,new UserDTO(userDAO.getUserById(id)));
+	public ResultJson getUser(Integer id) {
+		User user = userDAO.getUser(id);
+		if(user == null)
+			return new ResultJson(APIConstant.UnfoundFail);
+		else
+			return new ResultJson(APIConstant.Success,new UserDTO(userDAO.getUser(id)));
+	}
+
+	@Override
+	public ResultJson create(UserDTO userDTO) {
+		return new ResultJson(APIConstant.Success,new UserDTO(userDAO.create(new User(userDTO))));
 	}
 }

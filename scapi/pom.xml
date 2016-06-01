@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>scapi</groupId>
 	<artifactId>scapi</artifactId>
@@ -56,22 +55,10 @@
 			<version>${spring.version}</version>
 		</dependency>
 		<!-- Spring Security -->
-		<!-- <dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-core</artifactId>
-			<version>${spring.security.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-web</artifactId>
-			<version>${spring.security.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-config</artifactId>
-			<version>${spring.security.version}</version>
-		</dependency> -->
-		
+		<!-- <dependency> <groupId>org.springframework.security</groupId> <artifactId>spring-security-core</artifactId> <version>${spring.security.version}</version> </dependency> <dependency> <groupId>org.springframework.security</groupId> 
+			<artifactId>spring-security-web</artifactId> <version>${spring.security.version}</version> </dependency> <dependency> <groupId>org.springframework.security</groupId> <artifactId>spring-security-config</artifactId> 
+			<version>${spring.security.version}</version> </dependency> -->
+
 		<!-- ======= Shiro Security ============= -->
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
@@ -83,7 +70,7 @@
 			<artifactId>shiro-web</artifactId>
 			<version>${shiro.version}</version>
 		</dependency>
-		
+
 		<!-- ehcache -->
 
 		<dependency>
@@ -96,13 +83,11 @@
 			<artifactId>ehcache-core</artifactId>
 			<version>2.6.11</version>
 		</dependency>
-		<!-- <dependency> <groupId>org.terracotta</groupId> <artifactId>ehcache-probe</artifactId> 
-			<version>1.0.2</version> </dependency> -->
+		<!-- <dependency> <groupId>org.terracotta</groupId> <artifactId>ehcache-probe</artifactId> <version>1.0.2</version> </dependency> -->
 
 
 		<!-- memcache -->
-		<!-- <dependency> <groupId>com.google.code.simple-spring-memcached</groupId> 
-			<artifactId>xmemcached-provider</artifactId> <version>3.3.0</version> </dependency> -->
+		<!-- <dependency> <groupId>com.google.code.simple-spring-memcached</groupId> <artifactId>xmemcached-provider</artifactId> <version>3.3.0</version> </dependency> -->
 
 		<!-- Jackson JSON Mapper -->
 		<dependency>
@@ -193,13 +178,11 @@
 		</dependency>
 
 		<!-- sitemesh -->
-		<!-- <dependency> <groupId>org.sitemesh</groupId> <artifactId>sitemesh</artifactId> 
-			<version>3.0.0</version> </dependency> -->
+		<!-- <dependency> <groupId>org.sitemesh</groupId> <artifactId>sitemesh</artifactId> <version>3.0.0</version> </dependency> -->
 
 		<!-- ======= Shiro Security ============= -->
-		<!-- <dependency> <groupId>org.apache.shiro</groupId> <artifactId>shiro-core</artifactId> 
-			<version>${shiro.version}</version> </dependency> <dependency> <groupId>org.apache.shiro</groupId> 
-			<artifactId>shiro-web</artifactId> <version>${shiro.version}</version> </dependency> -->
+		<!-- <dependency> <groupId>org.apache.shiro</groupId> <artifactId>shiro-core</artifactId> <version>${shiro.version}</version> </dependency> <dependency> <groupId>org.apache.shiro</groupId> <artifactId>shiro-web</artifactId> 
+			<version>${shiro.version}</version> </dependency> -->
 		<!-- spring data with redis -->
 
 		<dependency>
@@ -212,14 +195,14 @@
 			<artifactId>jedis</artifactId>
 			<version>2.6.1</version>
 		</dependency>
-		
+
 		<!-- Hibernate Validator -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
 			<version>4.2.0.Final</version>
 		</dependency>
-		
+
 		<!-- api doc -->
 		<dependency>
 			<groupId>io.springfox</groupId>
@@ -237,6 +220,12 @@
 			<artifactId>guava</artifactId>
 			<version>19.0</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>0.7.5</version>
+		</dependency>
 	</dependencies>
 
 	<!-- set different profile, default local -->
@@ -246,6 +235,8 @@
 			<id>dev</id>
 			<properties>
 				<rp.build.warname>dev</rp.build.warname>
+				<log4j.logLevel>INFO</log4j.logLevel>
+				<log4j.logMethod>stdout</log4j.logMethod>
 			</properties>
 			<activation>
 				<activeByDefault>true</activeByDefault>
@@ -268,6 +259,8 @@
 			<id>uat</id>
 			<properties>
 				<rp.build.warname>uat</rp.build.warname>
+				<log4j.logLevel>DEBUG</log4j.logLevel>
+				<log4j.logMethod>stdout</log4j.logMethod>
 			</properties>
 			<activation>
 				<activeByDefault>false</activeByDefault>
@@ -290,6 +283,8 @@
 			<id>prod</id>
 			<properties>
 				<rp.build.warname>prod</rp.build.warname>
+				<log4j.logLevel>DEBUG</log4j.logLevel>
+				<log4j.logMethod>stdout</log4j.logMethod>
 			</properties>
 			<activation>
 				<activeByDefault>true</activeByDefault>
@@ -307,47 +302,6 @@
 					</resource>
 				</resources>
 			</build>
-		</profile>
-
-		<!-- log file related -->
-		<!-- Step 1 log4j log level -->
-		<profile>
-			<id>debug</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<properties>
-				<log4j.logLevel>DEBUG</log4j.logLevel>
-			</properties>
-		</profile>
-		<profile>
-			<id>info</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<properties>
-				<log4j.logLevel>INFO</log4j.logLevel>
-			</properties>
-		</profile>
-
-		<!-- Step 2 log4j log method -->
-		<profile>
-			<id>stdout</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<properties>
-				<log4j.logMethod>stdout</log4j.logMethod>
-			</properties>
-		</profile>
-		<profile>
-			<id>file</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<properties>
-				<log4j.logMethod>file</log4j.logMethod>
-			</properties>
 		</profile>
 
 	</profiles>

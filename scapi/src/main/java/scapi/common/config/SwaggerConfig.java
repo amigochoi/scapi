@@ -5,6 +5,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import scapi.model.dto.UserDTO;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -27,8 +28,7 @@ public class SwaggerConfig {
 
 		return new Docket(DocumentationType.SWAGGER_2)
 				.forCodeGeneration(true)
-				/*.ignoredParameterTypes(DeviceDTO.class, MemberDTO.class,
-						TokenDTO.class)*/.apiInfo(apiInfo()).select()
+				.ignoredParameterTypes(UserDTO.class).apiInfo(apiInfo()).select()
 				.apis(RequestHandlerSelectors.any()).paths(PathSelectors.any())
 				.build();
 

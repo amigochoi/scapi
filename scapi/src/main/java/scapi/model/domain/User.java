@@ -28,4 +28,11 @@ public class User implements Serializable {
 		this.userPhone = userDTO.getUserPhone();
 
 	}
+
+	public User(Integer userId, String userName, String userEmail, String userPhone) {
+		this.userId = userId;
+		this.userName = userName;
+		this.userEmail = userEmail;
+		this.userPhone = userPhone;
+	}
 }

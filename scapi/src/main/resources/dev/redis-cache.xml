@@ -5,8 +5,8 @@
 	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
 	
 	<util:map id="redisCacheTimeMap" map-class="java.util.LinkedHashMap">
-		<entry key="userCache" value="500" />
-		<entry key="productCache" value="500" />
+		<entry key="getUsers" value="500" />
+		<entry key="getUser" value="500" />
 	</util:map>
 	
 </beans>

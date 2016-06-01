@@ -1,10 +1,14 @@
 package scapi.dao;
 
+import java.util.List;
+
 import scapi.model.domain.User;
 
 
 public interface UserDAO {
-	public User getUser(User user);
+	public List<User> getUsers(User user);
 	
-	public User getUserById(Integer id);
+	public User getUser(Integer id);
+	
+	public User create(User user);
 }

@@ -13,7 +13,6 @@ public class ResultJson implements Serializable {
 	private static final long serialVersionUID = 1L;
 	Object data;
 	ResultMeta meta;
-	ResultPagination pageination;
 	
 	public ResultJson(){
 		
@@ -29,16 +28,11 @@ public class ResultJson implements Serializable {
 		this.meta = new ResultMeta(resultCode, resultMessage);
 	}
 	
-	public ResultJson(Integer resultCode,Object data, ResultPagination pageination) {
-		this.data = data;
-		this.meta = new ResultMeta(resultCode, null);
-		this.pageination = pageination;
-	}
-	
 	public ResultJson(Integer resultCode,Object data) {
 		this.data = data;
 		this.meta = new ResultMeta(resultCode, null);
 	}
+	
 
 	public ResultJson(List<FieldError> allErrors) {
 		List<ResultError> resultErrors = new ArrayList<ResultError>();
