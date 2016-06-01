@@ -35,7 +35,7 @@ public class UserAPIController {
 	 * get list of users
 	 */
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = "userId", required = false, dataType = "int", paramType = "query"),
+		@ApiImplicitParam(name = "userId", required = false, dataType = "int",defaultValue="0", paramType = "query"),
 		@ApiImplicitParam(name = "userName", required = false, dataType = "string", paramType = "query"),
 		@ApiImplicitParam(name = "userEmail", required = false, dataType = "string", paramType = "query"),
 		@ApiImplicitParam(name = "userPhone", required = false, dataType = "string", paramType = "query") })

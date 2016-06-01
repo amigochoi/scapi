@@ -11,8 +11,9 @@ import lombok.Data;
 @Data
 public class ResultJson implements Serializable {
 	private static final long serialVersionUID = 1L;
-	Object data;
 	ResultMeta meta;
+	Object data;
+	
 	
 	public ResultJson(){
 		

@@ -10,7 +10,7 @@ public class ResultError implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String field;
 	private Object rejectedValue;
-	private String defaultMessage;
+	private String message;
 	
 	public ResultError(){
 		
@@ -19,6 +19,6 @@ public class ResultError implements Serializable{
 	public ResultError(String field, Object rejectedValue, String defaultMessage) {
 		this.field = field;
 		this.rejectedValue = rejectedValue;
-		this.defaultMessage = defaultMessage;
+		this.message = defaultMessage;
 	}
 }

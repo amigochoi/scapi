@@ -51,7 +51,19 @@ public class ControllerIntercepter {
 				cbjson.setMeta(new ResultMeta(cbjson.getMeta().getCode(), resultCodeMap.get(cbjson.getMeta().getCode()),cbjson.getMeta().getErrors() ));
 			}
 			
-			httpStatus = APIConstant.UnfoundFail.equals(cbjson.getMeta().getCode()) ? HttpStatus.NOT_FOUND : responseEntity.getStatusCode();
+			/*
+			 * assign http status by different result code
+			 * 4004, status 404
+			 * >=5000, status 500
+			 * else, own status (200)
+			 */
+			if( APIConstant.UnfoundFail.equals(cbjson.getMeta().getCode()) )
+				httpStatus = HttpStatus.NOT_FOUND;
+			else if (cbjson.getMeta().getCode() >= APIConstant.UnknowFail)
+				httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+			else
+				httpStatus = responseEntity.getStatusCode();
+			
 		} catch (Exception ex) {
 			log.error(ex.getMessage(),ex);
 			httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
