@@ -7,12 +7,3 @@ java spring RESTFUL API SAMPLE PROJECT
 3. event, error log
 4. AOP for handling resultCode and Exception Handling
 5. little admin console to handle the cache
-
-
-###HTTP REQUEST FLOW
-
-
-        (get/post)                                  DTO                         DOMAIN
-user  ------------> (AOP)------> Controller ------------------------>Service -----------> DAO
-                                (return                             (return               (return dataObject)
-                                ResponseEntity<ResultJson>)         ResultJson)
