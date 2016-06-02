@@ -38,7 +38,9 @@
 <!-- 	<import resource="applicationContext-redis-cache.xml" />
 	<import resource="classpath:redis-cache.xml" /> -->
 
-
+	<!-- mongodb -->
+	<import resource="mongo-db.xml" />
+	
 <!-- 	<import resource="aop-other.xml" /> -->
 	<import resource="constants.xml" />
 	<!-- <import resource="applicationContext-shiro.xml" /> -->

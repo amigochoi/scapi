@@ -2,8 +2,6 @@ package scapi.service.impl;
 
 import java.util.List;
 
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,12 +44,34 @@ public class UserServiceImpl implements UserService {
 		User user = userDAO.getUser(id);
 		if(user == null)
 			return new ResultJson(APIConstant.UnfoundFail);
-		else
-			return new ResultJson(APIConstant.Success,new UserDTO(userDAO.getUser(id)));
+		else{
+			return new ResultJson(APIConstant.Success,new UserDTO(user));
+		}
 	}
 
 	@Override
 	public ResultJson create(UserDTO userDTO) {
 		return new ResultJson(APIConstant.Success,new UserDTO(userDAO.create(new User(userDTO))));
+	}
+
+	@Override
+	public ResultJson update(UserDTO userDTO) {
+		User user = userDAO.getUser(userDTO.getUserId());
+		if(user == null)
+			return new ResultJson(APIConstant.UnfoundFail);
+		else{
+			return new ResultJson(APIConstant.Success,new UserDTO(userDAO.update(user,new User(userDTO)))); 
+		}
+	}
+
+	@Override
+	public ResultJson delete(Integer id) {
+		User user = userDAO.getUser(id);
+		if(user == null)
+			return new ResultJson(APIConstant.UnfoundFail);
+		else{
+			userDAO.delete(user);
+			return new ResultJson(APIConstant.Success,new UserDTO(user)); 
+		}
 	}
 }

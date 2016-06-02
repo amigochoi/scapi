@@ -35,7 +35,6 @@ public class UserAPIController {
 	 * get list of users
 	 */
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = "userId", required = false, dataType = "int",defaultValue="0", paramType = "query"),
 		@ApiImplicitParam(name = "userName", required = false, dataType = "string", paramType = "query"),
 		@ApiImplicitParam(name = "userEmail", required = false, dataType = "string", paramType = "query"),
 		@ApiImplicitParam(name = "userPhone", required = false, dataType = "string", paramType = "query") })
@@ -57,6 +56,38 @@ public class UserAPIController {
 		return ResponseEntity.ok(userService.getUser(userId));
 		
 	}
+	
+	/*
+	 * PUT
+	 * users/{id}
+	 * update a user
+	 */
+	@ApiImplicitParams({
+		@ApiImplicitParam(name = "userId", required = false, dataType = "int",defaultValue="0", paramType = "path"),
+		@ApiImplicitParam(name = "userName", required = false, dataType = "string", paramType = "query"),
+		@ApiImplicitParam(name = "userEmail", required = false, dataType = "string", paramType = "query"),
+		@ApiImplicitParam(name = "userPhone", required = false, dataType = "string", paramType = "query") })
+	@RequestMapping(value = "/{userId}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity<ResultJson> updateUser(@Valid UserDTO userDTO, BindingResult result) {
+		if (result.hasErrors()) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResultJson(result.getFieldErrors()));
+		}else{
+			return ResponseEntity.ok(userService.update(userDTO));
+		}
+	}
+	
+	/*
+	 * DELETE
+	 * users/{id}
+	 * delete a user
+	 */
+	@ApiImplicitParams({
+		@ApiImplicitParam(name = "userId", required = false, dataType = "int",defaultValue="0", paramType = "path") })
+	@RequestMapping(value = "/{userId}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity<ResultJson> deleteUser(@PathVariable Integer userId) {		
+		return ResponseEntity.ok(userService.delete(userId));
+	}
+	
 	
 	/*
 	 * POST

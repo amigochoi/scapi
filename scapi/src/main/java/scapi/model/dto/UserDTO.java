@@ -1,11 +1,13 @@
 package scapi.model.dto;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.Length.List;
 import org.hibernate.validator.constraints.NotEmpty;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Data;
 import scapi.model.domain.User;
@@ -28,6 +30,11 @@ public class UserDTO implements Serializable {
 	@Length(min = 8,max = 13)
 	private String userPhone;
 	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Hongkong")
+	private Date createdAt;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Hongkong")
+	private Date updatedAt;
+	
 	public UserDTO() {
 		// TODO Auto-generated constructor stub
 	}
@@ -38,5 +45,7 @@ public class UserDTO implements Serializable {
 		this.userName = user.getUserName();
 		this.userEmail = user.getUserEmail();
 		this.userPhone = user.getUserPhone();
+		this.createdAt = user.getCreatedAt();
+		this.updatedAt = user.getUpdatedAt();
 	}
 }

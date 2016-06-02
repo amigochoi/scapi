@@ -13,10 +13,11 @@
 		</repository>
 	</repositories>
 	<properties>
-		<spring.version>4.1.6.RELEASE</spring.version>
-		<spring.security.version>4.0.1.RELEASE</spring.security.version>
+		<spring.version>4.2.6.RELEASE</spring.version>
 		<jackson.version>2.3.3</jackson.version>
 		<shiro.version>1.2.3</shiro.version>
+		<spring.data.mongo.version>1.9.1.RELEASE</spring.data.mongo.version>
+		<spring.data.redis.version>1.7.1.RELEASE</spring.data.redis.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -54,10 +55,6 @@
 			<artifactId>spring-context-support</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-		<!-- Spring Security -->
-		<!-- <dependency> <groupId>org.springframework.security</groupId> <artifactId>spring-security-core</artifactId> <version>${spring.security.version}</version> </dependency> <dependency> <groupId>org.springframework.security</groupId> 
-			<artifactId>spring-security-web</artifactId> <version>${spring.security.version}</version> </dependency> <dependency> <groupId>org.springframework.security</groupId> <artifactId>spring-security-config</artifactId> 
-			<version>${spring.security.version}</version> </dependency> -->
 
 		<!-- ======= Shiro Security ============= -->
 		<dependency>
@@ -72,7 +69,6 @@
 		</dependency>
 
 		<!-- ehcache -->
-
 		<dependency>
 			<groupId>com.googlecode.ehcache-spring-annotations</groupId>
 			<artifactId>ehcache-spring-annotations</artifactId>
@@ -188,14 +184,27 @@
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-redis</artifactId>
-			<version>1.5.0.RELEASE</version>
+			<version>${spring.data.redis.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>redis.clients</groupId>
 			<artifactId>jedis</artifactId>
 			<version>2.6.1</version>
 		</dependency>
-
+		
+		<!-- mongodb java driver -->
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongo-java-driver</artifactId>
+			<version>2.12.4</version>
+		</dependency>
+		<!-- Spring data mongodb -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-mongodb</artifactId>
+			<version>${spring.data.mongo.version}</version>
+		</dependency>
+		
 		<!-- Hibernate Validator -->
 		<dependency>
 			<groupId>org.hibernate</groupId>

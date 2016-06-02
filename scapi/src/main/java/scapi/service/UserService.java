@@ -10,4 +10,8 @@ public interface UserService {
 	public ResultJson getUser(Integer id);
 	
 	public ResultJson create(UserDTO userDTO);
+	
+	public ResultJson update(UserDTO userDTO);
+	
+	public ResultJson delete(Integer id);
 }

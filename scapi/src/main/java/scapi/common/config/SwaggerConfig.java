@@ -36,7 +36,7 @@ public class SwaggerConfig {
 
 	private ApiInfo apiInfo() {
 		return new ApiInfoBuilder().title("API SPEC")
-				.description("SPI SPEC").contact("Eddie LI").version("1.2")
+				.description("A SAMPLE WITH RESTFUL CRUD API").contact("Eddie LI").version("1.0")
 				.build();
 	}
 
