@@ -1,6 +1,8 @@
 # scapi
 java spring RESTFUL API SAMPLE PROJECT
 
+![alt tag](https://github.com/eddielisc/scapi/blob/master/scapi/docs/HTTP%20Request.png)
+
 ###features
 1. with @Cacheable annotaion for bot redis, ehcache
 2. Basic http status and related result Code with standand payload
