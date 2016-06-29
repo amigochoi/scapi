@@ -5,16 +5,24 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
+import lombok.extern.slf4j.Slf4j;
 import scapi.dao.CounterDAO;
 import scapi.dao.UserDAO;
 import scapi.model.domain.User;
+import scapi.model.request.ListParam;
 
 @Repository("userDAO")
+@Slf4j
 public class UserDAOImpl implements UserDAO {
 	
 	private String collectionName = "users";
@@ -26,8 +34,23 @@ public class UserDAOImpl implements UserDAO {
 	private CounterDAO counterDAO;
 	
 	@Override
-	public List<User> getUsers(User user) {
-		return mongoOperation.find(this.buildQuery(user), User.class);
+	public List<User> getUsers(User user,ListParam listParam) {
+		Query q = this.buildQuery(user);
+		String[] sortsArray;
+		if(listParam.getSorts() != null && !listParam.getSorts().isEmpty()){
+			sortsArray = listParam.getSorts().split(",");
+			log.info("sortsArray length : {}",sortsArray.length);
+			for(String sort : sortsArray){
+				Direction sortOrder  = sort.charAt(0) == '-'  ? Direction.DESC : Direction.ASC;
+				String sortField = sort.charAt(0) == '-' ? sort.substring(1,sort.length()) : sort;
+				log.info("sort : {} {}", sortOrder,sortField);
+				q.with(new Sort(new Order(sortOrder,sortField)));
+			}
+		}
+		Pageable pageableRequest = new PageRequest(listParam.getPage(), listParam.getCount());
+		q.with(pageableRequest);
+			
+		return mongoOperation.find(q, User.class);
 	}
 
 	@Override

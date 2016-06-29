@@ -18,6 +18,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import lombok.extern.slf4j.Slf4j;
 import scapi.model.display.ResultJson;
 import scapi.model.dto.UserDTO;
+import scapi.model.request.ListParam;
 import scapi.service.UserService;
 
 @Controller("userAPIController")
@@ -37,10 +38,13 @@ public class UserAPIController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = "userName", required = false, dataType = "string", paramType = "query"),
 		@ApiImplicitParam(name = "userEmail", required = false, dataType = "string", paramType = "query"),
-		@ApiImplicitParam(name = "userPhone", required = false, dataType = "string", paramType = "query") })
+		@ApiImplicitParam(name = "userPhone", required = false, dataType = "string", paramType = "query"),
+		@ApiImplicitParam(name = "sorts", required = false, dataType = "string", paramType = "query"),
+		@ApiImplicitParam(name = "page", required = false, dataType = "number", paramType = "query"),
+		@ApiImplicitParam(name = "count", required = false, dataType = "number", paramType = "query")})
 	@RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseEntity<ResultJson> getUsers(UserDTO userDTO) {
-		return ResponseEntity.status(HttpStatus.OK).body(userService.getUsers(userDTO));
+	public @ResponseBody ResponseEntity<ResultJson> getUsers(UserDTO userDTO, ListParam listParam) {
+		return ResponseEntity.status(HttpStatus.OK).body(userService.getUsers(userDTO,listParam));
 	}
 	
 	/*

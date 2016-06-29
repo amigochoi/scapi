@@ -13,6 +13,7 @@ import scapi.model.display.ResultJson;
 import scapi.model.domain.User;
 import scapi.model.dto.UserDTO;
 import scapi.model.dto.UsersDTO;
+import scapi.model.request.ListParam;
 import scapi.service.UserService;
 
 
@@ -25,10 +26,10 @@ public class UserServiceImpl implements UserService {
 //	@Cacheable(cacheName = "getUsers", keyGenerator = @KeyGenerator(name = "StringCacheKeyGenerator"), cacheNull = false)
 //	@org.springframework.cache.annotation.Cacheable(value = "getUsers", unless="#result == null")
 	@Override
-	public ResultJson getUsers(UserDTO userDTO) {
+	public ResultJson getUsers(UserDTO userDTO, ListParam listParam) {
 		ModelMapper modelMapper = new ModelMapper();
 		User userParam =  modelMapper.map(userDTO, User.class);
-		List<User> users = userDAO.getUsers(userParam);
+		List<User> users = userDAO.getUsers(userParam,listParam);
 	    List<UserDTO> userDTOs = modelMapper.map(users,  new TypeToken<List<UserDTO>>() {}.getType());
 	    
 	    if(userDTOs == null)
