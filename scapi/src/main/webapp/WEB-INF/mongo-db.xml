@@ -6,16 +6,15 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd 
 	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd 
 	http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.1.xsd 
-	http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd"
+	http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo.xsd"
 	default-autowire="byName">
 	<!-- ===================mongo db ============================ -->
-	<mongo:mongo id="mongo" host="${mongo.db.url}" port="${mongo.db.port}" />
+	<mongo:mongo id="mongo" host="${mongo.db.url}" port="${mongo.db.port}"/>
+		
 	<mongo:db-factory id="mongoDbFactory" host="${mongo.db.url}"
 		port="${mongo.db.port}" username="${mongo.db.username}" password="${mongo.db.password}"
 		dbname="${mongo.db.name}" mongo-ref="mongo" />
-	<mongo:repositories base-package="ssapi.dao" />
-	
-	
+	<mongo:repositories base-package="scapi.dao" />
 	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
 		<constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
 	</bean>

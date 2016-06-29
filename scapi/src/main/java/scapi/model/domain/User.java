@@ -1,17 +1,19 @@
 package scapi.model.domain;
 
-import java.io.Serializable;
 import java.util.Date;
 
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.support.IsNewStrategy;
 
 import lombok.Data;
 import scapi.model.dto.UserDTO;
 
 @Document(collection = "users")
 @Data
-public class User implements Serializable {
+public class User {
 
 	/**
 	 * 
@@ -24,7 +26,7 @@ public class User implements Serializable {
 	private String userPhone;
 	private Date createdAt;
 	private Date updatedAt;
-
+	
 	public User() {
 		// TODO Auto-generated constructor stub
 	}
