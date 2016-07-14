@@ -29,7 +29,8 @@ public class SwaggerConfig {
 
 		return new Docket(DocumentationType.SWAGGER_2)
 				.forCodeGeneration(true)
-				.ignoredParameterTypes(UserDTO.class,ListParam.class).apiInfo(apiInfo()).select()
+				.useDefaultResponseMessages(false)
+				.ignoredParameterTypes(ListParam.class).apiInfo(apiInfo()).select()
 				.apis(RequestHandlerSelectors.any()).paths(PathSelectors.any())
 				.build();
 

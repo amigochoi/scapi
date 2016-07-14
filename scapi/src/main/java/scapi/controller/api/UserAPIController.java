@@ -9,12 +9,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import scapi.model.display.ResultJson;
 import scapi.model.dto.UserDTO;
@@ -52,9 +56,6 @@ public class UserAPIController {
 	 * users/{id}
 	 * get a single user record
 	 */
-	@ApiImplicitParams({
-		@ApiImplicitParam(name = "userId", required = false, dataType = "int",defaultValue="0", paramType = "path")
-	 })	
 	@RequestMapping(value = "/{userId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity<ResultJson> getUserById(@PathVariable Integer userId) {
 		return ResponseEntity.ok(userService.getUser(userId));
@@ -66,16 +67,12 @@ public class UserAPIController {
 	 * users/{id}
 	 * update a user
 	 */
-	@ApiImplicitParams({
-		@ApiImplicitParam(name = "userId", required = false, dataType = "int",defaultValue="0", paramType = "path"),
-		@ApiImplicitParam(name = "userName", required = false, dataType = "string", paramType = "query"),
-		@ApiImplicitParam(name = "userEmail", required = false, dataType = "string", paramType = "query"),
-		@ApiImplicitParam(name = "userPhone", required = false, dataType = "string", paramType = "query") })
 	@RequestMapping(value = "/{userId}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseEntity<ResultJson> updateUser(@Valid UserDTO userDTO, BindingResult result) {
+	public @ResponseBody ResponseEntity<ResultJson> updateUser(@PathVariable Integer userId, @RequestBody @Valid UserDTO userDTO, BindingResult result) {
 		if (result.hasErrors()) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResultJson(result.getFieldErrors()));
 		}else{
+			userDTO.setUserId(userId);
 			return ResponseEntity.ok(userService.update(userDTO));
 		}
 	}
@@ -85,8 +82,6 @@ public class UserAPIController {
 	 * users/{id}
 	 * delete a user
 	 */
-	@ApiImplicitParams({
-		@ApiImplicitParam(name = "userId", required = false, dataType = "int",defaultValue="0", paramType = "path") })
 	@RequestMapping(value = "/{userId}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity<ResultJson> deleteUser(@PathVariable Integer userId) {		
 		return ResponseEntity.ok(userService.delete(userId));
@@ -98,12 +93,8 @@ public class UserAPIController {
 	 * users
 	 * create a user
 	 */
-	@ApiImplicitParams({
-		@ApiImplicitParam(name = "userName", required = false, dataType = "string", paramType = "query"),
-		@ApiImplicitParam(name = "userEmail", required = false, dataType = "string", paramType = "query"),
-		@ApiImplicitParam(name = "userPhone", required = false, dataType = "string", paramType = "query") })
 	@RequestMapping(value = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseEntity<ResultJson> createUser(@Valid UserDTO userDTO, BindingResult result) {
+	public @ResponseBody ResponseEntity<ResultJson> createUser(@RequestBody @Valid UserDTO userDTO, BindingResult result) {
 		if (result.hasErrors()) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResultJson(result.getFieldErrors()));
 		}else{

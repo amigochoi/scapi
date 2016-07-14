@@ -9,6 +9,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import scapi.model.domain.User;
 
@@ -16,6 +17,8 @@ import scapi.model.domain.User;
 public class UserDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	@ApiModelProperty(hidden = true)
 	private Integer userId;
 	
 	@NotEmpty
@@ -31,8 +34,10 @@ public class UserDTO implements Serializable {
 	private String userPhone;
 	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Hongkong")
+	@ApiModelProperty(hidden = true)
 	private Date createdAt;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Hongkong")
+	@ApiModelProperty(hidden = true)
 	private Date updatedAt;
 	
 	public UserDTO() {

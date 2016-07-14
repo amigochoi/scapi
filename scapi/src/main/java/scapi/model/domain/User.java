@@ -1,5 +1,6 @@
 package scapi.model.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import org.springframework.data.annotation.CreatedDate;
@@ -13,7 +14,7 @@ import scapi.model.dto.UserDTO;
 
 @Document(collection = "users")
 @Data
-public class User {
+public class User implements Serializable{
 
 	/**
 	 * 
